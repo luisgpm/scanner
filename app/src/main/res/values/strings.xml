@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Scanner de activos</string>
+    <string name="activo_vacio">Aquí se mostrará la información del activo</string>
+    <string name="activo_header">Activo</string>
+    <string name="numero_activo">Número de activo:</string>
+    <string name="placa">Placa:</string>
+    <string name="descripcion">Descripción:</string>
+    <string name="modelo">Modelo:</string>
+    <string name="marca">Marca:</string>
+    <string name="serie">Serie:</string>
+    <string name="estado">Estado:</string>
+    <string name="scanner">scanner</string>
+</resources>
