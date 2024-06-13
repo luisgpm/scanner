@@ -8,6 +8,8 @@ import com.journeyapps.barcodescanner.BarcodeCallback;
 import com.journeyapps.barcodescanner.BarcodeResult;
 import android.widget.Toast;
 
+import android.content.Intent;
+
 
 public class CustomScannerActivity extends CaptureActivity {
     // Puedes personalizar aún más esta actividad si es necesario
@@ -18,7 +20,19 @@ public class CustomScannerActivity extends CaptureActivity {
         setContentView(R.layout.activity_custom_scanner);
 
         barcodeView = findViewById(R.id.zxing_barcode_scanner);
-        barcodeView.decodeContinuous(callback); // Configurar el callback para el escaneo continuo
+
+        barcodeView.decodeContinuous(new BarcodeCallback() {
+            @Override
+            public void barcodeResult(BarcodeResult result) {
+                if (result.getText() != null) {
+                    // Enviar el resultado de vuelta a MainActivity
+                    Intent intent = new Intent();
+                    intent.putExtra("SCANNED_RESULT", result.getText());
+                    setResult(RESULT_OK, intent);
+                    finish();
+                }
+            }
+        }); // Configurar el callback para el escaneo continuo
     }
 
     // Callback para manejar el resultado del escaneo

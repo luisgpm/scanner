@@ -37,6 +37,7 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <TextView
+        android:id="@+id/text_cent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/activo_vacio"

@@ -2,6 +2,7 @@ package com.example.scanneractivos;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
@@ -17,15 +18,21 @@ import androidx.core.app.ActivityCompat;
 import com.google.zxing.integration.android.IntentResult;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
     private static final int CAMERA_PERMISSION_REQUEST_CODE = 100;
+
+    private static final int SCANNER_REQUEST_CODE = 101;
+
+    private TextView scannedResultTextView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         FloatingActionButton fabScan = findViewById(R.id.fab_scan);
+        scannedResultTextView = findViewById(R.id.text_cent);
 
         fabScan.setOnClickListener(view -> checkCameraPermission());
     }
@@ -44,8 +51,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void startScanner() {
-        Intent intent = new Intent(MainActivity.this, CustomScannerActivity.class);
-        startActivity(intent);
+        Intent intent = new Intent(this, CustomScannerActivity.class);
+        startActivityForResult(intent, SCANNER_REQUEST_CODE);
     }
 
     @Override
@@ -67,16 +74,26 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         // Procesa el resultado del escaneo
-        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-        if (result != null) {
-            if (result.getContents() == null) {
-                // Si el escaneo fue cancelado
+        if (requestCode == SCANNER_REQUEST_CODE){
+            if (resultCode == RESULT_OK && data != null){
+                String scannedData = data.getStringExtra("SCANNED_RESULT");
+                if (scannedData != null){
+                    scannedResultTextView.setText(scannedData);
+                }
+            }else{
                 Toast.makeText(this, "Escaneo cancelado", Toast.LENGTH_SHORT).show();
-            } else {
-                // Si se encontró un código, puedes manejarlo aquí
-                String scannedData = result.getContents();
-                Toast.makeText(this, "Código escaneado: " + scannedData, Toast.LENGTH_SHORT).show();
             }
         }
+//        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+//        if (result != null) {
+//            if (result.getContents() == null) {
+//                // Si el escaneo fue cancelado
+//                Toast.makeText(this, "Escaneo cancelado", Toast.LENGTH_SHORT).show();
+//            } else {
+//                // Si se encontró un código, puedes manejarlo aquí
+//                String scannedData = result.getContents();
+//                Toast.makeText(this, "Código escaneado: " + scannedData, Toast.LENGTH_SHORT).show();
+//            }
+//        }
     }
 }
