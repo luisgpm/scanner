@@ -27,31 +27,39 @@ public class MainActivity extends AppCompatActivity {
 
         FloatingActionButton fabScan = findViewById(R.id.fab_scan);
 
-        fabScan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.CAMERA)
-                        != PackageManager.PERMISSION_GRANTED) {
-                    // Si el permiso de la cámara no está concedido, solicítalo
-                    ActivityCompat.requestPermissions(MainActivity.this,
-                            new String[]{Manifest.permission.CAMERA},
-                            CAMERA_PERMISSION_REQUEST_CODE);
-                } else {
-                    // Si el permiso de la cámara está concedido, abre el escáner
-                    startScanner();
-                }
-            }
-        });
+        fabScan.setOnClickListener(view -> checkCameraPermission());
+    }
 
-
-
+    private void checkCameraPermission() {
+        if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED) {
+            // Si el permiso de la cámara no está concedido, solicítalo
+            ActivityCompat.requestPermissions(MainActivity.this,
+                    new String[]{Manifest.permission.CAMERA},
+                    CAMERA_PERMISSION_REQUEST_CODE);
+        } else {
+            // Si el permiso de la cámara está concedido, abre el escáner
+            startScanner();
+        }
     }
 
     private void startScanner() {
-        IntentIntegrator integrator = new IntentIntegrator(MainActivity.this);
-        integrator.setCaptureActivity(CustomScannerActivity.class); // Personaliza la actividad de escaneo
-        integrator.setOrientationLocked(false); // Permite la rotación de la pantalla
-        integrator.initiateScan();
+        Intent intent = new Intent(MainActivity.this, CustomScannerActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == CAMERA_PERMISSION_REQUEST_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // El permiso de la cámara fue otorgado, ahora puedes abrir el escáner
+                startScanner();
+            } else {
+                // El permiso de la cámara fue denegado, muestra un mensaje o toma alguna otra acción
+                Toast.makeText(this, "Permiso de la cámara denegado", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     @Override
@@ -69,24 +77,6 @@ public class MainActivity extends AppCompatActivity {
                 String scannedData = result.getContents();
                 Toast.makeText(this, "Código escaneado: " + scannedData, Toast.LENGTH_SHORT).show();
             }
-        }else {
-            super.onActivityResult(requestCode, resultCode, data);
         }
     }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == CAMERA_PERMISSION_REQUEST_CODE) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // El permiso de la cámara fue otorgado, ahora puedes abrir el escáner
-                startScanner();
-            } else {
-                // El permiso de la cámara fue denegado, muestra un mensaje o toma alguna otra acción
-                Toast.makeText(this, "Permiso de la cámara denegado", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
-
-
 }
