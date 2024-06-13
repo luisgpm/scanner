@@ -2,21 +2,13 @@ package com.example.scanneractivos;
 
 import android.Manifest;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Toast;
-//import android.provider.MediaStore;
-
 import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
-
-import com.google.zxing.integration.android.IntentResult;
-import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import android.widget.TextView;
 
@@ -84,16 +76,5 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, "Escaneo cancelado", Toast.LENGTH_SHORT).show();
             }
         }
-//        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-//        if (result != null) {
-//            if (result.getContents() == null) {
-//                // Si el escaneo fue cancelado
-//                Toast.makeText(this, "Escaneo cancelado", Toast.LENGTH_SHORT).show();
-//            } else {
-//                // Si se encontró un código, puedes manejarlo aquí
-//                String scannedData = result.getContents();
-//                Toast.makeText(this, "Código escaneado: " + scannedData, Toast.LENGTH_SHORT).show();
-//            }
-//        }
     }
 }

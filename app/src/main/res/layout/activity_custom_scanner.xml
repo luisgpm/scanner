@@ -16,12 +16,13 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:background="@color/azul_apollo"
             android:minHeight="?attr/actionBarSize"
-            android:theme="?attr/actionBarTheme">
+            android:theme="?attr/actionBarTheme"
+            app:navigationIcon="@drawable/ic_back">
 
-            <TextView
+        <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fontFamily="@font/roboto"
@@ -36,8 +37,8 @@
             android:id="@+id/zxing_barcode_scanner"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:zxing_scanner_layout="@layout/zxing_barcode_scanner"
             />
+        <!--            app:zxing_scanner_layout="@layout/zxing_barcode_scanner"-->
     </com.google.android.material.appbar.AppBarLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -56,7 +56,8 @@
         android:contentDescription="@string/scanner"
         android:focusable="true"
         android:src="@drawable/ic_camera_solid"
-        android:backgroundTint="@color/azul_apollo"
+        app:backgroundTint="@color/azul_apollo"
+        app:tint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
