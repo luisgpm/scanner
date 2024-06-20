@@ -40,4 +40,6 @@ dependencies {
     androidTestImplementation(libs.espresso.core)
     implementation(libs.zxing)
     implementation(libs.journeyapp)
+    implementation(libs.retrofit)
+    implementation(libs.retrofitGson)
 }

@@ -1,7 +1,6 @@
 package com.example.scanneractivos;
 
 import android.os.Bundle;
-import com.journeyapps.barcodescanner.CaptureActivity;
 import androidx.appcompat.app.AppCompatActivity;
 import com.journeyapps.barcodescanner.DecoratedBarcodeView;
 import com.journeyapps.barcodescanner.BarcodeCallback;
@@ -12,8 +11,15 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.view.View;
 
+import android.util.Log;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+
 public class CustomScannerActivity extends AppCompatActivity  {
-    // Puedes personalizar aún más esta actividad si es necesario
+
+    private ApiService apiService;
     private DecoratedBarcodeView barcodeView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,16 +50,49 @@ public class CustomScannerActivity extends AppCompatActivity  {
         @Override
         public void barcodeResult(BarcodeResult result) {
             if (result.getText() != null) {
-                // Aquí puedes manejar el resultado del escaneo
-                // Enviar el resultado de vuelta a MainActivity
-                Intent intent = new Intent();
-                intent.putExtra("SCANNED_RESULT", result.getText());
-                setResult(RESULT_OK, intent);
-                finish();
+                String scannedResult = result.getText();
+
+                Retrofit retrofit = RetrofitClient.getClient("http://127.0.0.1:8000/api/");
+                apiService = retrofit.create(ApiService.class);
+                obtenerActivo(scannedResult);
             }
 
         };
     };
+
+    private void obtenerActivo(String placa) {
+        Call<ApiResponse> call = apiService.obtenerActivo(placa);
+        call.enqueue(new Callback<ApiResponse>() {
+            @Override
+            public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    ApiResponse apiResponse = response.body();
+                    Activo activo = apiResponse.getActivos();
+
+                    // Procesar el objeto activo como sea necesario
+                    // Por ejemplo, podrías guardar el objeto activo en SharedPreferences
+                    // o pasar el objeto a MainActivity usando un Intent
+                    Intent intent = new Intent();
+                    intent.putExtra("ACTIVO", activo);
+                    setResult(RESULT_OK, intent);
+                    finish();
+                } else {
+                    Log.e("Error", "Respuesta no exitosa");
+                    // Manejar el error si la respuesta no es exitosa
+                    setResult(RESULT_CANCELED);
+                    finish();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ApiResponse> call, Throwable t) {
+                Log.e("Error", "Error al obtener el activo: " + t.getMessage());
+                // Manejar el fallo en la solicitud
+                setResult(RESULT_CANCELED);
+                finish();
+            }
+        });
+    }
 
     @Override
     protected void onResume() {

@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.NonNull;
@@ -62,15 +64,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode,  Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         // Procesa el resultado del escaneo
         if (requestCode == SCANNER_REQUEST_CODE){
             if (resultCode == RESULT_OK && data != null){
-                String scannedData = data.getStringExtra("SCANNED_RESULT");
-                if (scannedData != null){
-                    scannedResultTextView.setText(scannedData);
+                Activo activo = (Activo) data.getSerializableExtra("ACTIVO");
+                if (activo != null){
+                    scannedResultTextView.setText(activo.getEstado());
                 }
             }else{
                 Toast.makeText(this, "Escaneo cancelado", Toast.LENGTH_SHORT).show();
