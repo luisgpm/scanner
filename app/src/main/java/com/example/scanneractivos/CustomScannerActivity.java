@@ -52,7 +52,7 @@ public class CustomScannerActivity extends AppCompatActivity  {
             if (result.getText() != null) {
                 String scannedResult = result.getText();
 
-                Retrofit retrofit = RetrofitClient.getClient("http://127.0.0.1:8000/api/");
+                Retrofit retrofit = RetrofitClient.getClient("https://apiprueba.apollo.mx/api/");
                 apiService = retrofit.create(ApiService.class);
                 obtenerActivo(scannedResult);
             }
