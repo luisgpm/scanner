@@ -1,16 +1,16 @@
 package com.example.scanneractivos;
 
 public class ApiResponse {
-    private Activo activos;
+    private Activo activo;
     private String foto;
 
     // Getters y setters
-    public Activo getActivos() {
-        return activos;
+    public Activo getActivo() {
+        return activo;
     }
 
-    public void setActivos(Activo activos) {
-        this.activos = activos;
+    public void setActivo(Activo activo) {
+        this.activo = activo;
     }
 
     public String getFoto() {

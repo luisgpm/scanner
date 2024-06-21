@@ -1,51 +1,63 @@
 package com.example.scanneractivos;
 
-public class Empleado {
-    private String emp_codigo;
-    private String emp_nombre;
-    private String emp_paterno;
-    private String emp_materno;
-    private String emp_rfc;
+import com.google.gson.annotations.SerializedName;
+
+import java.io.Serializable;
+
+public class Empleado implements Serializable {
+    private static final long serialVersionUID = 1L;
+    @SerializedName("emp__codigo")
+    private int emp_codigo;
+    @SerializedName("emp__nombre")
+    private String empNombre;
+
+    @SerializedName("emp__paterno")
+    private String empPaterno;
+
+    @SerializedName("emp__materno")
+    private String empMaterno;
+
+    @SerializedName("emp__r_f_c")
+    private String empRfc;
 
     // Getters y setters
-    public String getEmpCodigo() {
+    public int getEmpCodigo() {
         return emp_codigo;
     }
 
-    public void setEmpCodigo(String emp_codigo) {
+    public void setEmpCodigo(int emp_codigo) {
         this.emp_codigo = emp_codigo;
     }
 
     public String getEmpNombre() {
-        return emp_nombre;
-    }
-
-    public void setEmpNombre(String emp_nombre) {
-        this.emp_nombre = emp_nombre;
+        return empNombre;
     }
 
     public String getEmpPaterno() {
-        return emp_paterno;
-    }
-
-    public void setEmpPaterno(String emp_paterno) {
-        this.emp_paterno = emp_paterno;
+        return empPaterno;
     }
 
     public String getEmpMaterno() {
-        return emp_materno;
-    }
-
-    public void setEmpMaterno(String emp_materno) {
-        this.emp_materno = emp_materno;
+        return empMaterno;
     }
 
     public String getEmpRfc() {
-        return emp_rfc;
+        return empRfc;
     }
 
-    public void setEmpRfc(String emp_rfc) {
-        this.emp_rfc = emp_rfc;
+    public void setEmpNombre(String empNombre) {
+        this.empNombre = empNombre;
     }
 
+    public void setEmpPaterno(String empPaterno) {
+        this.empPaterno = empPaterno;
+    }
+
+    public void setEmpMaterno(String empMaterno) {
+        this.empMaterno = empMaterno;
+    }
+
+    public void setEmpRfc(String empRfc) {
+        this.empRfc = empRfc;
+    }
 }

@@ -10,6 +10,7 @@ constraintlayout = "2.1.4"
 zxing = "3.4.1"
 journeyapp = "4.2.0"
 retrofit = "2.9.0"
+gson = "2.8.8"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -23,6 +24,7 @@ zxing = { group = "com.google.zxing", name = "core", version.ref = "zxing" }
 journeyapp = { group = "com.journeyapps", name = "zxing-android-embedded", version.ref = "journeyapp" }
 retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 retrofitGson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit" }
+gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

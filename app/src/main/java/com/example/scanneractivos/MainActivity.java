@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK && data != null){
                 Activo activo = (Activo) data.getSerializableExtra("ACTIVO");
                 if (activo != null){
-                    scannedResultTextView.setText(activo.getEstado());
+                    scannedResultTextView.setText(activo.getEmpleado().getEmpNombre());
                 }
             }else{
                 Toast.makeText(this, "Escaneo cancelado", Toast.LENGTH_SHORT).show();

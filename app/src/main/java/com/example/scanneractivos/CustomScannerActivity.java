@@ -67,8 +67,11 @@ public class CustomScannerActivity extends AppCompatActivity  {
             public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     ApiResponse apiResponse = response.body();
-                    Activo activo = apiResponse.getActivos();
 
+                    Activo activo = apiResponse.getActivo();
+                    if (activo != null){
+                        Empleado empleado = activo.getEmpleado();
+                    }
                     // Procesar el objeto activo como sea necesario
                     // Por ejemplo, podrías guardar el objeto activo en SharedPreferences
                     // o pasar el objeto a MainActivity usando un Intent
