@@ -3,7 +3,6 @@
     <style name="Base.Theme.ScannerActivos" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
         <item name="colorPrimary">@color/azul_apollo</item>
-        <item name="icon">@color/white</item>
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
     </style>
 </resources>

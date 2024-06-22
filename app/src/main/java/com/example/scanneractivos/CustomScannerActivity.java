@@ -67,7 +67,7 @@ public class CustomScannerActivity extends AppCompatActivity  {
             public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     ApiResponse apiResponse = response.body();
-
+                    String foto = apiResponse.getFoto();
                     Activo activo = apiResponse.getActivo();
                     if (activo != null){
                         Empleado empleado = activo.getEmpleado();
@@ -77,6 +77,7 @@ public class CustomScannerActivity extends AppCompatActivity  {
                     // o pasar el objeto a MainActivity usando un Intent
                     Intent intent = new Intent();
                     intent.putExtra("ACTIVO", activo);
+                    intent.putExtra("FOTO", foto);
                     setResult(RESULT_OK, intent);
                     finish();
                 } else {

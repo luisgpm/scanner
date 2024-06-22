@@ -2,7 +2,7 @@ package com.example.scanneractivos;
 
 import java.io.Serializable;
 public class Activo implements Serializable {
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 2L;
     private String placa;
     private String activo;
     private String desc_corta;
@@ -12,6 +12,8 @@ public class Activo implements Serializable {
     private String estado;
     private int id_empleado;
     private Empleado empleado;
+
+    private long no_activo;
 
     // Getters y setters
     public String getPlaca() {
@@ -84,5 +86,13 @@ public class Activo implements Serializable {
 
     public void setEmpleado(Empleado empleado) {
         this.empleado = empleado;
+    }
+
+    public long getNo_activo() {
+        return no_activo;
+    }
+
+    public void setNo_activo(long no_activo) {
+        this.no_activo = no_activo;
     }
 }
