@@ -8,12 +8,12 @@ public class Puesto implements Serializable {
     private static final long serialVersionUID = 1L;
     @SerializedName("pues_codigo")
 
-    private int codigo;
+    private String codigo;
     @SerializedName("pues_descripcion")
 
     private String descripcion;
 
-    public int getCodigo() {
+    public String getCodigo() {
         return codigo;
     }
 
@@ -21,7 +21,7 @@ public class Puesto implements Serializable {
         return descripcion;
     }
 
-    public void setCodigo(int codigo) {
+    public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
 

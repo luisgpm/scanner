@@ -32,6 +32,11 @@ public class CustomScannerActivity extends AppCompatActivity  {
         barcodeView = findViewById(R.id.zxing_barcode_scanner);
 
         TextView statusView = barcodeView.findViewById(com.google.zxing.client.android.R.id.zxing_status_view);
+        if (statusView != null ) {
+            statusView.setText("Coloca el código de barras o QR dentro del área");
+            statusView.setVisibility(View.VISIBLE);
+            statusView.setTextColor(getResources().getColor(R.color.white));
+        }
 
         barcodeView.decodeContinuous(callback);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -67,12 +72,6 @@ public class CustomScannerActivity extends AppCompatActivity  {
                     ApiResponse apiResponse = response.body();
                     String foto = apiResponse.getFoto();
                     Activo activo = apiResponse.getActivo();
-                    if (activo != null){
-                        Empleado empleado = activo.getEmpleado();
-                    }
-                    // Procesar el objeto activo como sea necesario
-                    // Por ejemplo, podrías guardar el objeto activo en SharedPreferences
-                    // o pasar el objeto a MainActivity usando un Intent
                     Intent intent = new Intent();
                     intent.putExtra("ACTIVO", activo);
                     intent.putExtra("FOTO", foto);
@@ -80,7 +79,6 @@ public class CustomScannerActivity extends AppCompatActivity  {
                     finish();
                 } else {
                     Log.e("Error", "Respuesta no exitosa");
-                    // Manejar el error si la respuesta no es exitosa
                     setResult(RESULT_CANCELED);
                     finish();
                 }
