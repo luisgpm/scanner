@@ -1,4 +1,4 @@
-package com.example.scanneractivos;
+package scannerActivos;
 
 import com.google.gson.annotations.SerializedName;
 

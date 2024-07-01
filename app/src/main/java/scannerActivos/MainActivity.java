@@ -1,4 +1,4 @@
-package com.example.scanneractivos;
+package scannerActivos;
 
 import android.Manifest;
 import android.content.Intent;
@@ -6,18 +6,20 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
+import com.apollo.scanneractivos.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import android.widget.TextView;
-import android.util.Base64;
 
 public class MainActivity extends AppCompatActivity {
     private static final int CAMERA_PERMISSION_REQUEST_CODE = 100;
@@ -114,13 +116,13 @@ public class MainActivity extends AppCompatActivity {
                     nombre.setText(activo.getEmpleado().getEmpNombre() + ' ' + activo.getEmpleado().getEmpPaterno() + ' ' + activo.getEmpleado().getEmpMaterno() + " | " + activo.getEmpleado().getEmpCodigo() );
                     puesto.setText(activo.getEmpleado().getPuesto().getDescripcion());
                     depto.setText(activo.getEmpleado().getEstructuraNominal().getDescripcion());
-                    no_activo.setText("Número de activo: "+activo.getNo_activo());
-                    placa.setText("Placa: "+activo.getPlaca());
-                    desc.setText("Descripción: "+activo.getDescCorta());
-                    modelo.setText("Modelo: "+activo.getModelo());
-                    marca.setText("Marca: "+activo.getMarca());
-                    serie.setText("Serie: "+activo.getNoSerie());
-                    estado.setText("Estado: "+activo.getEstado());
+                    no_activo.setText("Número de activo: " + activo.getNo_activo());
+                    placa.setText("Placa: " + activo.getPlaca());
+                    desc.setText("Descripción: " + activo.getDescCorta());
+                    modelo.setText("Modelo: " + activo.getModelo());
+                    marca.setText("Marca: " + activo.getMarca());
+                    serie.setText("Serie: " + activo.getNoSerie());
+                    estado.setText("Estado: " + activo.getEstado());
                     foto.setVisibility(View.VISIBLE);
                     banner.setVisibility(View.VISIBLE);
                     nombre.setVisibility(View.VISIBLE);

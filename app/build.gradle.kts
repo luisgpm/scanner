@@ -3,15 +3,15 @@ plugins {
 }
 
 android {
-    namespace = "com.example.scanneractivos"
+    namespace = "com.apollo.scanneractivos"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.scanneractivos"
+        applicationId = "com.apollo.scanneractivos"
         minSdk = 24
         targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 3
+        versionName = "1.3"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 

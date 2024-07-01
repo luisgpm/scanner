@@ -1,4 +1,4 @@
-package com.example.scanneractivos;
+package scannerActivos;
 
 import java.io.Serializable;
 public class Activo implements Serializable {

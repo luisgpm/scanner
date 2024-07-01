@@ -1,17 +1,20 @@
-package com.example.scanneractivos;
+package scannerActivos;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
-import com.journeyapps.barcodescanner.DecoratedBarcodeView;
+import androidx.appcompat.widget.Toolbar;
+
+import com.apollo.scanneractivos.R;
 import com.journeyapps.barcodescanner.BarcodeCallback;
 import com.journeyapps.barcodescanner.BarcodeResult;
-import android.content.Intent;
-import androidx.appcompat.widget.Toolbar;
-import android.view.MenuItem;
-import android.widget.TextView;
-import android.view.View;
+import com.journeyapps.barcodescanner.DecoratedBarcodeView;
 
-import android.util.Log;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -29,11 +32,6 @@ public class CustomScannerActivity extends AppCompatActivity  {
         barcodeView = findViewById(R.id.zxing_barcode_scanner);
 
         TextView statusView = barcodeView.findViewById(com.google.zxing.client.android.R.id.zxing_status_view);
-        if (statusView != null ) {
-            statusView.setText("Coloca el código de barras o QR dentro del área");
-            statusView.setVisibility(View.VISIBLE);
-            statusView.setTextColor(getResources().getColor(R.color.rojo_brillante));
-        }
 
         barcodeView.decodeContinuous(callback);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -46,7 +44,7 @@ public class CustomScannerActivity extends AppCompatActivity  {
     }
 
     // Callback para manejar el resultado del escaneo
-    private BarcodeCallback callback = new BarcodeCallback() {
+    private final BarcodeCallback callback = new BarcodeCallback() {
         @Override
         public void barcodeResult(BarcodeResult result) {
             if (result.getText() != null) {

@@ -1,4 +1,4 @@
-package com.example.scanneractivos;
+package scannerActivos;
 
 public class ApiResponse {
     private Activo activo;

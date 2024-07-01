@@ -1,4 +1,4 @@
-package com.example.scanneractivos;
+package scannerActivos;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
