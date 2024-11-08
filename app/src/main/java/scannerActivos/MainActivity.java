@@ -20,6 +20,9 @@ import androidx.core.content.ContextCompat;
 
 import com.apollo.scanneractivos.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
     private static final int CAMERA_PERMISSION_REQUEST_CODE = 100;
@@ -40,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView banner;
 
     private ImageView foto;
+    private TextView fecha;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
         estado = findViewById(R.id.estado);
         banner = findViewById(R.id.text_in_rectangle);
         foto = findViewById(R.id.foto);
+        fecha = findViewById(R.id.fecha);
 
 
         fabScan.setOnClickListener(view -> checkCameraPermission());
@@ -99,23 +104,28 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         // Procesa el resultado del escaneo
+        limpiarCampos();
         if (requestCode == SCANNER_REQUEST_CODE){
             if (resultCode == RESULT_OK && data != null){
                 Activo activo = (Activo) data.getSerializableExtra("ACTIVO");
                 String fotoString = data.getStringExtra("FOTO");
                 if (activo != null){
-                    if (foto != null ){
+                    Empleado empleado = (Empleado) activo.getEmpleado();
+                    if (fotoString != null ){
                         byte[] decodedString = Base64.decode(fotoString, Base64.DEFAULT);
                         Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString,0 , decodedString.length);
                         foto.setImageBitmap(decodedByte);
                     }
 
                     scannedResultTextView.setVisibility(View.GONE);
-                    nombre.setText(activo.getEmpleado().getEmpNombre() + ' ' + activo.getEmpleado().getEmpPaterno() + ' ' + activo.getEmpleado().getEmpMaterno() + " | " + activo.getEmpleado().getEmpCodigo() );
-                    puesto.setText(activo.getEmpleado().getPuesto().getDescripcion());
-                    depto.setText(activo.getEmpleado().getEstructuraNominal().getDescripcion());
+                    if (empleado != null){
+                        nombre.setText(activo.getEmpleado().getEmpNombre() + ' ' + activo.getEmpleado().getEmpPaterno() + ' ' + activo.getEmpleado().getEmpMaterno() + " | " + activo.getEmpleado().getEmpCodigo() );
+                        puesto.setText(activo.getEmpleado().getPuesto().getDescripcion());
+                        depto.setText(activo.getEmpleado().getEstructuraNominal().getDescripcion());
+                    }else{
+                        nombre.setText("No Asignado");
+                    }
                     no_activo.setText("Número de activo: " + activo.getNo_activo());
                     placa.setText("Placa: " + activo.getPlaca());
                     desc.setText("Descripción: " + activo.getDescCorta());
@@ -123,23 +133,70 @@ public class MainActivity extends AppCompatActivity {
                     marca.setText("Marca: " + activo.getMarca());
                     serie.setText("Serie: " + activo.getNoSerie());
                     estado.setText("Estado: " + activo.getEstado());
-                    foto.setVisibility(View.VISIBLE);
-                    banner.setVisibility(View.VISIBLE);
-                    nombre.setVisibility(View.VISIBLE);
-                    puesto.setVisibility(View.VISIBLE);
-                    depto.setVisibility(View.VISIBLE);
-                    no_activo.setVisibility(View.VISIBLE);
-                    placa.setVisibility(View.VISIBLE);
-                    desc.setVisibility(View.VISIBLE);
-                    modelo.setVisibility(View.VISIBLE);
-                    marca.setVisibility(View.VISIBLE);
-                    serie.setVisibility(View.VISIBLE);
-                    estado.setVisibility(View.VISIBLE);
+                    if (activo.getFecha() != null){
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+                        String fechaFormateada = sdf.format(activo.getFecha());
+                        fecha.setText("Fecha: " + fechaFormateada);
+                    }else{
+                        fecha.setText("Fecha: N/A");
+                    }
+                    mostrarCampos();
 
+                }else{
+                    Toast.makeText(this, "No se encontró el activo", Toast.LENGTH_SHORT).show();
+                    ocultarCampos();
                 }
             }else{
                 Toast.makeText(this, "No se encontró el activo", Toast.LENGTH_SHORT).show();
+                ocultarCampos();
             }
         }
+    }
+
+    private void limpiarCampos(){
+        foto.setImageDrawable(null);
+        nombre.setText("");
+        puesto.setText("");
+        depto.setText("");
+        no_activo.setText("");
+        placa.setText("");
+        desc.setText("");
+        modelo.setText("");
+        marca.setText("");
+        serie.setText("");
+        estado.setText("");
+        fecha.setText("");
+    }
+    private void mostrarCampos(){
+        foto.setVisibility(View.VISIBLE);
+        banner.setVisibility(View.VISIBLE);
+        nombre.setVisibility(View.VISIBLE);
+        puesto.setVisibility(View.VISIBLE);
+        depto.setVisibility(View.VISIBLE);
+        no_activo.setVisibility(View.VISIBLE);
+        placa.setVisibility(View.VISIBLE);
+        desc.setVisibility(View.VISIBLE);
+        modelo.setVisibility(View.VISIBLE);
+        marca.setVisibility(View.VISIBLE);
+        serie.setVisibility(View.VISIBLE);
+        estado.setVisibility(View.VISIBLE);
+        fecha.setVisibility(View.VISIBLE);
+    }
+
+    private void ocultarCampos(){
+        scannedResultTextView.setVisibility(View.VISIBLE);
+        foto.setVisibility(View.GONE);
+        banner.setVisibility(View.GONE);
+        nombre.setVisibility(View.GONE);
+        puesto.setVisibility(View. GONE);
+        depto.setVisibility(View.GONE);
+        no_activo.setVisibility(View.GONE);
+        placa.setVisibility(View.GONE);
+        desc.setVisibility(View.GONE);
+        modelo.setVisibility(View.GONE);
+        marca.setVisibility(View.GONE);
+        serie.setVisibility(View.GONE);
+        estado.setVisibility(View.GONE);
+        fecha.setVisibility(View.GONE);
     }
 }

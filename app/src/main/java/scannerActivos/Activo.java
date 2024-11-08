@@ -1,6 +1,9 @@
 package scannerActivos;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
+import java.util.Date;
 public class Activo implements Serializable {
     private static final long serialVersionUID = 2L;
     private String placa;
@@ -10,6 +13,9 @@ public class Activo implements Serializable {
     private String marca;
     private String no_serie;
     private String estado;
+    @SerializedName("fecha_capitalizacion")
+
+    private Date fecha;
     private int id_empleado;
     private Empleado empleado;
 
@@ -25,7 +31,7 @@ public class Activo implements Serializable {
     }
 
     public String getActivo() {
-        return activo;
+        return activo != null ? activo : "N/A" ;
     }
 
     public void setActivo(String activo) {
@@ -33,7 +39,7 @@ public class Activo implements Serializable {
     }
 
     public String getDescCorta() {
-        return desc_corta;
+        return desc_corta != null ? desc_corta : "N/A";
     }
 
     public void setDescCorta(String desc_corta) {
@@ -41,7 +47,7 @@ public class Activo implements Serializable {
     }
 
     public String getModelo() {
-        return modelo;
+        return modelo != null ? modelo : "N/A" ;
     }
 
     public void setModelo(String modelo) {
@@ -49,7 +55,7 @@ public class Activo implements Serializable {
     }
 
     public String getMarca() {
-        return marca;
+        return marca != null ? marca : "N/A";
     }
 
     public void setMarca(String marca) {
@@ -57,7 +63,7 @@ public class Activo implements Serializable {
     }
 
     public String getNoSerie() {
-        return no_serie;
+        return no_serie != null ? no_serie : "N/A";
     }
 
     public void setNoSerie(String no_serie) {
@@ -65,7 +71,7 @@ public class Activo implements Serializable {
     }
 
     public String getEstado() {
-        return estado;
+        return estado != null ? estado : "N/A";
     }
 
     public void setEstado(String estado) {
@@ -94,5 +100,13 @@ public class Activo implements Serializable {
 
     public void setNo_activo(long no_activo) {
         this.no_activo = no_activo;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
     }
 }

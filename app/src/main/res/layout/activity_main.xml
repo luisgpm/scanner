@@ -77,15 +77,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
-        android:clickable="true"
         android:layout_margin="30dp"
+        android:clickable="true"
         android:contentDescription="@string/scanner"
         android:focusable="true"
         android:src="@drawable/ic_camera_solid"
         app:backgroundTint="@color/azul_apollo"
-        app:tint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:tint="@color/white" />
 
     <TextView
         android:id="@+id/nombre"
@@ -207,5 +207,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/serie" />
+
+    <TextView
+        android:id="@+id/fecha"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="32dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/estado" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
